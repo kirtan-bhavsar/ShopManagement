@@ -232,12 +232,11 @@ body {
   margin-right: 0.5rem;
 }
 
-/* Make header buttons aligned */
 .accordion-header .header-buttons button {
   margin: 0;
 }
 
-/* Responsive tweaks */
+
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 1rem;
