@@ -1,4 +1,3 @@
-/* Reset */
 body {
   font-family: Arial, sans-serif;
   background: #f9fafb;
@@ -53,25 +52,57 @@ body {
 
 /* ------------------ DASHBOARD ------------------ */
 .dashboard-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 2rem auto;
-  padding: 1rem;
+  padding: 1.5rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 .title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
   color: #333;
+}
+
+/* Add Shop Form */
+.add-shop-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.add-shop-container input {
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 220px;
+}
+.add-shop-btn {
+  padding: 0.6rem 0.9rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+.add-shop-btn:hover {
+  background: #1e40af;
 }
 
 /* Accordion */
 .accordion-item {
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #fff;
   overflow: hidden;
   margin-bottom: 1rem;
@@ -81,13 +112,18 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.8rem 1rem;
-  cursor: pointer;
   background: #f3f4f6;
   font-weight: 600;
   color: #333;
+  border-bottom: 1px solid #ddd;
 }
 .accordion-header:hover {
   background: #e5e7eb;
+}
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Buttons */
@@ -96,12 +132,15 @@ body {
   color: white;
   border: none;
   border-radius: 6px;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s;
 }
 .toggle-btn:hover {
   background: #1e40af;
@@ -118,12 +157,39 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  margin-left: 0.5rem;
+  transition: background 0.3s;
 }
 .add-product-btn:hover {
   background: #059669;
 }
 
+.edit-product-btn {
+  padding: 0.4rem 0.6rem;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.edit-product-btn:hover {
+  background: #b45309;
+}
+
+.save-product-btn {
+  padding: 0.5rem 0.8rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.save-product-btn:hover {
+  background: #1e40af;
+}
+
+/* Accordion Content */
 .accordion-content {
   padding: 1rem;
   background: #fff;
@@ -131,6 +197,7 @@ body {
 .product-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 1rem;
 }
 .product-table th,
 .product-table td {
@@ -148,34 +215,37 @@ body {
   display: flex;
   gap: 0.5rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 .add-product-form input {
-  padding: 0.5rem;
+  padding: 0.5rem 0.7rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   width: 150px;
 }
-.save-product-btn {
-  padding: 0.5rem 0.8rem;
-  background: #2563eb;
-  color: white;
-  border: none;
+.edit-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  cursor: pointer;
-}
-.save-product-btn:hover {
-  background: #1e40af;
-}
-
-.edit-product-btn {
-  padding: 0.3rem 0.5rem;
-  background: #f59e0b;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.edit-product-btn:hover {
-  background: #b45309;
+  font-size: 0.95rem;
+  width: 120px;
+  margin-right: 0.5rem;
 }
 
+/* Make header buttons aligned */
+.accordion-header .header-buttons button {
+  margin: 0;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  .add-shop-container input {
+    width: 160px;
+  }
+  .add-product-form input {
+    width: 120px;
+  }
+}

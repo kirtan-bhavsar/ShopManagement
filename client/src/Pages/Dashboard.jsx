@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [newProduct, setNewProduct] = useState({ name: "", price: "", quantity: "" });
   const [editingProductId, setEditingProductId] = useState(null);
   const [editedProduct, setEditedProduct] = useState({ name: "", price: "", quantity: "" });
+  const [newShopName, setNewShopName] = useState("");
 
   useEffect(() => {
     fetchShops();
@@ -26,13 +27,37 @@ const Dashboard = () => {
       setShops(data.data);
     } catch (error) {
       console.error(error);
-      toast.error("Error fetching shops");
     }
   };
 
   // Toggle shop accordion
   const toggleShop = (shopId) => {
     setExpandedShop(expandedShop === shopId ? null : shopId);
+  };
+
+  // Add Shop
+  const handleNewShopChange = (e) => {
+    setNewShopName(e.target.value);
+  };
+
+  const addShop = async () => {
+    if (!newShopName.trim()) {
+      toast.error("Shop name is required");
+      return;
+    }
+    try {
+      await axios.post(
+        "http://localhost:5500/api/v1/shop/add",
+        { name: newShopName },
+        { withCredentials: true }
+      );
+      toast.success("Shop added successfully");
+      setNewShopName("");
+      fetchShops();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to add shop");
+    }
   };
 
   // Edit shop
@@ -68,7 +93,7 @@ const Dashboard = () => {
   };
 
   const saveProduct = async (shopId) => {
-    if (!newProduct.name) {
+    if (!newProduct.name.trim()) {
       toast.error("Product name is required");
       return;
     }
@@ -102,7 +127,7 @@ const Dashboard = () => {
   };
 
   const saveEditedProduct = async (productId) => {
-    if (!editedProduct.name) {
+    if (!editedProduct.name.trim()) {
       toast.error("Product name is required");
       return;
     }
@@ -124,6 +149,20 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h2 className="title">My Shops</h2>
+
+      {/* Add Shop Form */}
+      <div className="add-shop-container">
+        <input
+          type="text"
+          placeholder="New Shop Name"
+          value={newShopName}
+          onChange={handleNewShopChange}
+        />
+        <button className="add-shop-btn" onClick={addShop}>
+          <FontAwesomeIcon icon={faPlus} /> Add Shop
+        </button>
+      </div>
+
       {shops.length === 0 ? (
         <p>No shops found</p>
       ) : (
@@ -135,21 +174,24 @@ const Dashboard = () => {
                 {editingShopId === shopId ? (
                   <>
                     <input
+                      className="edit-input"
                       type="text"
                       value={editedShopName}
                       onChange={(e) => setEditedShopName(e.target.value)}
                     />
-                    <button
-                      className="toggle-btn"
-                      onClick={() => saveShopName(shopId)}
-                    >
-                      <FontAwesomeIcon icon={faCheck} />
-                    </button>
+                    <div className="header-buttons">
+                      <button
+                        className="toggle-btn save-btn"
+                        onClick={() => saveShopName(shopId)}
+                      >
+                        <FontAwesomeIcon icon={faCheck} />
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <>
                     <span>{shopObj.Shop.name}</span>
-                    <div>
+                    <div className="header-buttons">
                       <button
                         className="toggle-btn"
                         onClick={() => toggleShop(shopId)}
@@ -159,7 +201,6 @@ const Dashboard = () => {
                       <button
                         className="toggle-btn"
                         onClick={() => startEditingShop(shopId, shopObj.Shop.name)}
-                        style={{ marginLeft: "0.5rem" }}
                       >
                         <FontAwesomeIcon icon={faPen} />
                       </button>
@@ -192,6 +233,7 @@ const Dashboard = () => {
                             <>
                               <td>
                                 <input
+                                  className="edit-input"
                                   type="text"
                                   name="name"
                                   value={editedProduct.name}
@@ -200,6 +242,7 @@ const Dashboard = () => {
                               </td>
                               <td>
                                 <input
+                                  className="edit-input"
                                   type="number"
                                   name="price"
                                   value={editedProduct.price}
@@ -208,6 +251,7 @@ const Dashboard = () => {
                               </td>
                               <td>
                                 <input
+                                  className="edit-input"
                                   type="number"
                                   name="quantity"
                                   value={editedProduct.quantity}
