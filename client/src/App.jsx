@@ -8,6 +8,8 @@ import Login from "./Pages/Login.jsx";
 import Register from "./Pages/Register.jsx";
 import Dashboard from "./Pages/Dashboard.jsx";
 
+// Ready For Final Push
+
 const App = () => {
   return (
     <Router>

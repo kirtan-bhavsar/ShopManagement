@@ -7,6 +7,7 @@ import productRouter from "./routes/productRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+// Ready for final push
 
 const app = express();
 
